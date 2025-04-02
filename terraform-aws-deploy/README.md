@@ -1,9 +1,29 @@
-# GitHub Portfolio 🚀
-Este repositório contém projetos backend desenvolvidos com **Spring Boot, Quarkus e Terraform**.
+# ☁ Infraestrutura AWS com Terraform
 
-## 📌 Projetos incluídos:
-- 🏗 **Spring Boot API REST**: CRUD com PostgreSQL.
-- ⚡ **Microsserviço com Quarkus + Kafka**: Comunicação assíncrona entre serviços.
-- ☁ **Infraestrutura com Terraform**: Deploy automático na AWS.
+Este projeto cria infraestrutura AWS usando **Terraform**, incluindo **EC2**, **RDS (PostgreSQL)** e **S3**.
 
-💡 Explore cada projeto nas pastas específicas!
+## 🚀 Tecnologias Utilizadas:
+- Terraform
+- AWS EC2, RDS (PostgreSQL), S3
+
+## 📌 Como Rodar?
+1️⃣ **Configurar credenciais AWS**
+```sh
+export AWS_ACCESS_KEY_ID="sua-chave"
+export AWS_SECRET_ACCESS_KEY="sua-chave-secreta"
+
+```
+2️⃣ **Inicializar Terraform**
+````sh
+terraform init
+
+`````
+3️⃣ **Validar e aplicar a infraestrutura**
+```sh
+terraform apply -auto-approve
+
+````
+4️⃣ **Obter os valores gerados**
+```sh
+terraform output
+````
