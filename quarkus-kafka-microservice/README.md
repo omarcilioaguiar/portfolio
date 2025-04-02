@@ -1,9 +1,25 @@
-# GitHub Portfolio 🚀
-Este repositório contém projetos backend desenvolvidos com **Spring Boot, Quarkus e Terraform**.
+# ⚡ Microsserviço com Quarkus e Kafka
 
-## 📌 Projetos incluídos:
-- 🏗 **Spring Boot API REST**: CRUD com PostgreSQL.
-- ⚡ **Microsserviço com Quarkus + Kafka**: Comunicação assíncrona entre serviços.
-- ☁ **Infraestrutura com Terraform**: Deploy automático na AWS.
+Este projeto implementa um **microsserviço assíncrono** usando **Quarkus** e **Apache Kafka**.
 
-💡 Explore cada projeto nas pastas específicas!
+## 🚀 Tecnologias Utilizadas:
+- Java 17 + Quarkus
+- Apache Kafka + Strimzi
+- Docker + Docker Compose
+
+## 📌 Como Rodar?
+1️⃣ **Suba o ambiente kafka**
+```sh
+docker-compose up -d 
+
+```
+2️⃣ **Executar o microserviço**
+````sh
+./mvnw quarkus:dev
+
+`````
+3️⃣ **Testando envio de mensagens no Kafka**
+```sh
+curl -X POST http://localhost:8080/events -H "Content-Type: application/json" -d '{"id": 1, "mensagem": "Teste Kafka"}'
+
+````
