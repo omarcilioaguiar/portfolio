@@ -1,7 +1,5 @@
 package br.com.marcilioaguiar.gestao_vagas.modules.company.useCases;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +20,7 @@ public class CreateCompanyUseCase {
                     throw new UserFoundException();
                 });
 
-                return null;
-       // return this.companyRepository.save(companyEntity); verificar o que está ocorrendo aqui
+        return this.companyRepository.save(companyEntity);
+
     }
 }
