@@ -1,6 +1,6 @@
-package br.com.marcilioaguiar.gestao_vagas.modules.candidate;
+package br.com.marcilioaguiar.gestao_vagas.modules.company.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,15 +15,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+@Entity(name = "company")
 @Data
-@Entity(name = "candidate")
-public class CandidateEntity {
-
+public class CompanyEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String name;
-
+    
     @NotBlank
     @Pattern(regexp = "\\S+", message = "O campo [username] não deve conter espaço") 
     private String username;
@@ -33,11 +32,12 @@ public class CandidateEntity {
 
     @Length(min = 10, max = 100, message = "A senha deve conter entre (10) e (100) caracteres")
     private String password;
-    
+
+    private String website;
+    private String name;
     private String description;
-    private String curriculum;
-    
+
     @CreationTimestamp
-    private LocalDate createdAt;
-    
+    private LocalDateTime createdAt;
+
 }
