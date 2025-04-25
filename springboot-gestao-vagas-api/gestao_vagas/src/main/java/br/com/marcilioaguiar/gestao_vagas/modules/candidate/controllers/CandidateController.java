@@ -3,7 +3,7 @@ package br.com.marcilioaguiar.gestao_vagas.modules.candidate.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.marcilioaguiar.gestao_vagas.modules.candidate.CandidateEntity;
+import br.com.marcilioaguiar.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import br.com.marcilioaguiar.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import jakarta.validation.Valid;
 
