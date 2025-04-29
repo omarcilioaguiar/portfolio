@@ -31,12 +31,13 @@ public class CandidateController {
     @PostMapping("/")
     @PreAuthorize("hasRole('CANDIDATE')")
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
-        try { 
+        try {
             var result = this.createCandidateUseCase.execute(candidateEntity);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
 
     @GetMapping("/")
     public ResponseEntity<Object> get(HttpServletRequest request) {
