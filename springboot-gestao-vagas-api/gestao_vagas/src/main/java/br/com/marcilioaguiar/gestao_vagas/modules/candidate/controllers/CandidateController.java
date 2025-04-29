@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.marcilioaguiar.gestao_vagas.modules.candidate.dto.ProfileCandidateResponseDTO;
 import br.com.marcilioaguiar.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import br.com.marcilioaguiar.gestao_vagas.modules.candidate.useCases.CreateCandidateUseCase;
 import br.com.marcilioaguiar.gestao_vagas.modules.candidate.useCases.ListAllJobByFilterUseCase;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/candidate")
+@Tag(name = "Candidato", description = "Informações do Candidato")
 public class CandidateController {
 
     @Autowired
@@ -44,7 +46,13 @@ public class CandidateController {
     private ListAllJobByFilterUseCase listAllJobByFilterUseCase;
 
     @PostMapping("/")
-    @PreAuthorize("hasRole('CANDIDATE')")
+    @Operation(summary = "Cadastro de Candidato", description = "Essa função é responsável por cadastrar um candidato.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", content = {
+            @Content(schema = @Schema(implementation = CandidateEntity.class))
+        }), 
+        @ApiResponse(responseCode = "400", description = "Usuário já existe")
+    })
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
         try {
             var result = this.createCandidateUseCase.execute(candidateEntity);
@@ -53,8 +61,17 @@ public class CandidateController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
+    
     @GetMapping("/")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    @Operation(summary = "Perfil do Candidato", description = "Essa função é responsável por buscar as informações do perfil do candidato.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", content = {
+            @Content(schema = @Schema(implementation = ProfileCandidateResponseDTO.class))
+        }), 
+        @ApiResponse(responseCode = "400", description = "User not found")
+    })
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<Object> get(HttpServletRequest request) {
         var idCandidate = request.getAttribute("candidate_id");
         try {
@@ -67,7 +84,6 @@ public class CandidateController {
 
     @GetMapping("/job")
     @PreAuthorize("hasRole('CANDIDATE')")
-    @Tag(name = "Candidato", description = "Informações do Candidato")
     @Operation(summary = "Listagem de Vagas disponíveis para o candidato", description = "Essa função é responsável por listar as vagas disponíveis para o candidato, filtrando por descrição.")
     @ApiResponses({
         @ApiResponse(responseCode = "200", content = {
