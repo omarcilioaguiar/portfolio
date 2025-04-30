@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.marcilioaguiar.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.marcilioaguiar.gestao_vagas.exceptions.UserNotFoundException;
+import br.com.marcilioaguiar.gestao_vagas.modules.candidate.entities.ApplyJobEntity;
+import br.com.marcilioaguiar.gestao_vagas.modules.candidate.repositories.ApplyJobRepository;
 import br.com.marcilioaguiar.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 import br.com.marcilioaguiar.gestao_vagas.modules.company.repositories.JobRepository;
 
@@ -19,9 +21,12 @@ public class ApplyJobCandidateUseCase {
     @Autowired
     private JobRepository jobRepository;
 
+    @Autowired
+    private ApplyJobRepository applyJobRepository;
+
     // ID do Candidato
     // ID da Vaga
-    public void execute(UUID idCandidate, UUID idJob) {
+    public ApplyJobEntity execute(UUID idCandidate, UUID idJob) {
         // Validar se o candidato existe
         this.candidateRepository.findById(idCandidate)
                 .orElseThrow(() -> {
@@ -35,6 +40,12 @@ public class ApplyJobCandidateUseCase {
                 });
 
         // Candidato já se inscreveu na vaga?
+        var appplyJob = ApplyJobEntity.builder()
+                .idCandidate(idCandidate)
+                .idJob(idJob)
+                .build();
 
+        appplyJob = applyJobRepository.save(appplyJob);
+        return appplyJob;
     }
 }
