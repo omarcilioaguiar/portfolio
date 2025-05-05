@@ -29,11 +29,7 @@ public class SecurityConfig {
             "/swagger-resources/**",
             "/swagger-resources/configuration/ui",
             "/swagger-resources/configuration/security",
-            "/actuator/**",
-            "/actuator/prometheus",
-            "/actuator/health",
-            "/actuator/info",
-            "/actuator/metrics"
+            "/actuator/**"
     };
 
     @Bean
