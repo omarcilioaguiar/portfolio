@@ -17,7 +17,7 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=gestao_vagas
-prometheus:
+  prometheus:
     container_name: prometheus
     image: prom/prometheus:latest
     volumes:
@@ -27,7 +27,7 @@ prometheus:
       - gv-network
     ports:
       - 9090:9090
-grafana:
+  grafana:
     container_name: grafana
     image: grafana/grafana:latest
     ports:
